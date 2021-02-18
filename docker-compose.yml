@@ -1,0 +1,15 @@
+version: "3"
+services:
+    php:
+        container_name: fseed_php
+        build: ./.docker
+        restart: always
+        working_dir: /php
+        ports:
+            - 8310:8310
+        expose:
+            - "8310"
+        volumes:
+            - ./php:/php
+        command: >
+            php artisan serve --host=0.0.0.0 --port=8310
