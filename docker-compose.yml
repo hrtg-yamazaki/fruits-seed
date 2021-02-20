@@ -2,7 +2,9 @@ version: "3"
 services:
     php:
         container_name: fseed_php
-        build: ./.docker/php
+        build: 
+            context: .
+            dockerfile: ./.docker/php/Dockerfile
         restart: always
         working_dir: /php
         ports:
@@ -13,3 +15,19 @@ services:
             - ./php:/php
         command: >
             php artisan serve --host=0.0.0.0 --port=8310
+    mysql:
+        container_name: fseed_mysql
+        image: mysql:5.7
+        restart: always
+        environment: 
+            MYSQL_DATABASE: $DB_DATABASE_FS
+            MYSQL_USER: $DB_USERNAME_FS
+            MYSQL_PASSWORD: $DB_PASSWORD_FS
+            MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD_FS
+            MYSQL_TCP_PORT: 3306
+            TZ: 'Asia/Tokyo'
+        volumes: 
+            - ./.docker/mysql/data:/var/lib/mysql/
+            - ./.docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+        ports: 
+            - 3306:3306
