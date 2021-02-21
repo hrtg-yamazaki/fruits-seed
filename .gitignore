@@ -23,4 +23,4 @@ Homestead.json
 .phpunit.result.cache
 
 # MySQL mounted data
-.docker/mysql/data
+mysql/data
