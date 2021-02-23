@@ -7,11 +7,9 @@ COPY ./php /php/
 WORKDIR /php
 
 RUN apt-get update \
-    && apt-get install -y libzip-dev zlib1g-dev mariadb-client \
+    && apt-get install -y libzip-dev zlib1g-dev unzip mariadb-client \
     && docker-php-ext-install zip pdo_mysql
 
 COPY --from=composer:1.10.13 /usr/bin/composer /usr/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV PATH $PATH:/usr/bin/composer/vendor/bin
-
-RUN composer install

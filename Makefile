@@ -1,33 +1,34 @@
 ##### 実行コマンド一覧 #####
 #
-# init: 初回実行用
+# init:             初回実行用
 #
-# up: サーバー実行
-# up-a: サーバー実行(detachedモードOFF)
+# up:               サーバー実行
+# up-a:             サーバー実行(detachedモードOFF)
 #
-# stop: コンテナストップ
-# down: コンテナdown
-# down-rmi: コンテナdown + イメージ削除
+# stop:             コンテナストップ
+# down:             コンテナdown
+# down-rmi:         コンテナdown + イメージ削除
 #
-# bash: phpコンテナにbashで入る
-# bash-db: mysqlコンテナにbashで入る 
+# bash:             phpコンテナ   に bashで入る
+# bash-db:          mysqlコンテナ に bashで入る
 #
-# migrate: マイグレーション
-# key-generate: appキー生成
+# migrate:          マイグレーション実行
+# composer-install: composer install
+# key-generate:     appキー生成
 # 
-# reset-app-force: アプリをDB含め最初から作り直す※取り扱い注意
+# reset-app-force:  アプリをDB含め最初から作り直す※取り扱い注意
 #
-# set-up: プロジェクトのセットアップ
-# mysql-setup: mysqldbのセットアップ
+# set-up:           プロジェクトのセットアップ
+# mysql-setup:      MySQLdbのセットアップ
 # 
 
-# sleep 2m を何とかしたい・・・
+# FIXME // migrate待ち問題
 init:
 	@make set-up
 	@make up
-	sleep 90
 	@make migrate
-	echo "Please try to access: http://localhost:8310/"
+	# "Please try to access: http://localhost:8310/"
+	# "If you have failed to migrate, try it again a few seconds later."
 
 up:
 	docker-compose up -d
@@ -50,6 +51,9 @@ bash:
 bash-db:
 	docker exec -it fseed_mysql /bin/bash
 
+composer-install:
+	docker-compose run php composer install --no-ansi
+
 migrate:
 	docker exec -it fseed_php php artisan migrate
 
@@ -65,4 +69,5 @@ reset-app-force:
 set-up:
 	cp .docker/.env.local .env
 	cp php/.env.local php/.env
+	@make composer-install
 	@make key-generate
