@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('', function() {
+    return redirect()->route('fruits.index');
+});
+
+Route::name('fruits.')->prefix("fruits")->group(function() {
+    Route::get("", "FruitController@index")->name("index");
+});
+
+Route::get('welcome', function () {
     return view('welcome');
 });
