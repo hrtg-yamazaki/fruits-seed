@@ -1,8 +1,7 @@
 <?php
 
-namespace Database\Seeds\Fruits;
-
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use App\Models\Fruit;
 
 class SourFruitsSeeder extends Seeder
@@ -19,6 +18,6 @@ class SourFruitsSeeder extends Seeder
             ['name'  => 'lemon',      'price' => 88],
             ['name'  => 'grapefruit', 'price' => 128],
         ];
-        DB::table('fruits')->insert();
+        DB::table('fruits')->insert($params);
     }
 }
