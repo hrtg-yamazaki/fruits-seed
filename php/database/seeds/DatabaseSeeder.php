@@ -9,6 +9,7 @@ class DatabaseSeeder extends Seeder
     /** 実行したいSeederをここに登録 */
     private const SEEDERS = [
         SourFruitsSeeder::class,
+        SweetFruitsSeeder::class,
     ];
 
     /**
