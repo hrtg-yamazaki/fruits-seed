@@ -14,7 +14,7 @@ http://localhost:8310
 ```
 $ git clone git@github.com:hrtg-yamazaki/fruits-seed.git
 
-$ cd fruit-seed
+$ cd fruits-seed
 
 $ make init
 ```
