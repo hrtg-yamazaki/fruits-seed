@@ -13,13 +13,14 @@
 # bash-db:          mysqlコンテナ に bashで入る
 #
 # migrate:          マイグレーション実行
+# seed:             シーダー実行
+#
 # composer-install: composer install
 # key-generate:     appキー生成
 # 
 # reset-app-force:  アプリをDB含め最初から作り直す※取り扱い注意
 #
 # set-up:           プロジェクトのセットアップ
-# mysql-setup:      MySQLdbのセットアップ
 # 
 
 # FIXME // migrate待ち問題
@@ -56,6 +57,9 @@ composer-install:
 
 migrate:
 	docker exec -it fseed_php php artisan migrate
+
+seed:
+	docker exec -it fseed_php php artisan db:seed
 
 key-generate:
 	docker-compose run --rm php php artisan key:generate --ansi

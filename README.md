@@ -24,3 +24,9 @@ $ make init
 ```
 $ make up
 ```
+
+- seeder実行
+
+```
+$ make seed
+```
