@@ -58,6 +58,9 @@ composer-install:
 migrate:
 	docker exec -it fseed_php php artisan migrate
 
+seed:
+	docker exec -it fseed_php php artisan db:seed
+
 key-generate:
 	docker-compose run --rm php php artisan key:generate --ansi
 
